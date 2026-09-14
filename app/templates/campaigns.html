@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaigns — Email Threat Forensics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="wide">
+    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <a href="/">Analyze new email</a>
+        <a href="/dashboard">Case Dashboard</a>
+        <a href="/audit-log">Audit Log</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <div class="mono" style="color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Attribution</div>
+    <h1>Detected Campaigns</h1>
+    <p style="color: var(--text-secondary); font-size: 13px;">
+        Cases are grouped when they share a sender domain, an originating IP, or are linked via
+        shared infrastructure — evidence of a coordinated campaign rather than isolated incidents.
+    </p>
+
+    {% for campaign in campaigns %}
+    <div class="campaign-card">
+        <div class="campaign-header">
+            <strong>Campaign #{{ loop.index }}</strong>
+            <span class="badge">{{ campaign.case_count }} linked cases</span>
+        </div>
+        <div class="entity-list mono">
+            Domains: {{ campaign.domains|join(', ') or '(none)' }}<br>
+            IPs: {{ campaign.ips|join(', ') or '(none)' }}<br>
+            <span style="color: var(--text-dim);">Highest fraud score in group: {{ campaign.max_score }}</span>
+        </div>
+        <table>
+            <tr><th>Case</th><th>Analyzed</th><th>Filename</th><th>Domain</th><th>IP</th><th>Score</th><th>Verdict</th></tr>
+            {% for case in campaign.cases %}
+            <tr>
+                <td class="mono">#{{ case.id }}</td>
+                <td class="mono">{{ case.analyzed_at[:19] }}</td>
+                <td>{{ case.filename }}</td>
+                <td class="mono">{{ case.sender_domain }}</td>
+                <td class="mono">{{ case.originating_ip }}</td>
+                <td>{{ case.fraud_score }}</td>
+                <td class="verdict-{{ case.verdict }}">{{ case.verdict }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <p style="color: var(--text-secondary); margin-top: 20px;">No campaigns detected yet — campaigns appear once 2 or more analyzed emails share infrastructure.</p>
+    {% endfor %}
+    <script src="{{ url_for('static', filename='network-bg.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Byte-compiled / Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local SQLite databases & temporary data
+*.db
+cases.db
+
+# User uploaded emails & temp files
+uploads/*.eml
+!uploads/.gitkeep
+threat_intel_cache/*.json
+
+# Logs & OS artifacts
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE & Editor settings
+.vscode/
+.idea/

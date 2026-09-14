@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Threat Forensics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <a href="/dashboard">Case Dashboard</a>
+        <a href="/campaigns">Campaigns</a>
+        <a href="/audit-log">Audit Log</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <div class="mono" style="color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Email Threat Forensics</div>
+    <h1>Trace where a fraudulent email really came from.</h1>
+    <p style="color: var(--text-secondary); font-size: 14px; margin-top: -4px;">
+        Upload a .eml file to see its full authentication trail, origin, and fraud verdict.
+    </p>
+
+    <div class="upload-box">
+        <form method="POST" action="/analyze" enctype="multipart/form-data">
+            <input type="file" name="email_file" accept=".eml" required>
+            <br><br>
+            <button type="submit">Analyze Email</button>
+        </form>
+    </div>
+
+    {% if result %}
+        {% if result.threat_assessment.score >= 60 %}
+        <div class="alert-banner">
+            ⚠ HIGH-RISK ALERT — This email shows strong indicators of fraud. Do not click any links or open attachments.
+        </div>
+        {% endif %}
+
+        <div class="stamp-wrap">
+            <div class="stamp stamp-{{ result.threat_assessment.verdict }}">{{ result.threat_assessment.verdict }}</div>
+            <span class="stamp-score">Fraud Score: {{ result.threat_assessment.score }} / 100 &nbsp;·&nbsp; Case #{{ result.case_id }}</span>
+        </div>
+
+        <div style="text-align: center;">
+            <a class="btn" href="/report/{{ result.case_id }}">Download Forensic PDF Report</a>
+        </div>
+
+        <h3>Evidence</h3>
+        <ul class="reasons">
+            {% for reason in result.threat_assessment.reasons %}
+                <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Sender Trace Path</h3>
+        <ul class="timeline">
+        {% for hop in result.received_chain %}
+            <li>
+                <span class="hop-ip">Hop {{ hop.hop_number }}: {{ hop.ips_found|join(', ') or '(no IP found)' }}</span><br>
+                <span class="hop-time">{{ hop.timestamp or 'unknown time' }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h3>Estimated Origin</h3>
+        {% if result.geolocation and not result.geolocation.error %}
+            <p class="mono" style="font-size: 13px;">
+                {{ result.geolocation.city }}, {{ result.geolocation.region }}, {{ result.geolocation.country }} &nbsp;·&nbsp;
+                IP {{ result.geolocation.ip }} &nbsp;·&nbsp; {{ result.geolocation.isp }}<br>
+                VPN/Proxy: {{ result.geolocation.is_proxy_or_vpn }} &nbsp;|&nbsp; Hosting: {{ result.geolocation.is_hosting_provider }}
+            </p>
+            <div id="origin-map"></div>
+        {% else %}
+            <p style="color: var(--text-secondary);">Could not determine location.</p>
+        {% endif %}
+
+        <h3>Identity Correlation</h3>
+        <p style="color: var(--text-secondary); font-size: 13px;">
+            Same domain in {{ result.correlation.same_domain_count }} prior case(s) &nbsp;|&nbsp;
+            Same IP in {{ result.correlation.same_ip_count }} prior case(s)<br>
+            Linked entities: <span class="mono">{{ result.correlation.linked_entities|join(', ') or '(none)' }}</span>
+        </p>
+
+         {% if result.geolocation and not result.geolocation.error %}
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script>
+            const map = L.map('origin-map').setView([{{ result.geolocation.latitude }}, {{ result.geolocation.longitude }}], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 18,
+            }).addTo(map);
+            L.marker([{{ result.geolocation.latitude }}, {{ result.geolocation.longitude }}])
+                .addTo(map)
+                .bindPopup("{{ result.geolocation.city }}, {{ result.geolocation.country }}<br>IP: {{ result.geolocation.ip }}")
+                .openPopup();
+        </script>
+        {% endif %}
+    {% endif %}
+    <script src="{{ url_for('static', filename='network-bg.js') }}"></script>
+</body>
+</html>

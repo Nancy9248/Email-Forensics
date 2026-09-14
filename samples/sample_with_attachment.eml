@@ -1,0 +1,43 @@
+From: Billing Dept <billing@invoice-portal-secure.net>
+To: victim@example-corp.com
+Subject: Your Invoice #4471 is overdue - Immediate payment required
+Date: Fri, 11 Sep 2026 09:00:00 +0000
+Authentication-Results: mx.example-corp.com; spf=fail
+ smtp.mailfrom=billing@invoice-portal-secure.net; dkim=none; dmarc=fail
+Received: from unknown (unknown [45.142.212.61]) by mx.example-corp.com; Fri,
+ 11 Sep 2026 09:00:05 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6104804144102835816=="
+
+--===============6104804144102835816==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Sir/Madam,
+
+Your invoice #4471 is now overdue. Please find the attached invoice document =
+and process payment immediately to avoid service suspension.
+
+Regards,
+Billing Department
+
+--===============6104804144102835816==
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Invoice_4471.pdf.exe"
+MIME-Version: 1.0
+
+TVqQAEZBS0VfVEVTVF9QQVlMT0FEX05PVF9SRUFMX01BTFdBUkVGQUtFX1RFU1RfUEFZTE9BRF9O
+T1RfUkVBTF9NQUxXQVJFRkFLRV9URVNUX1BBWUxPQURfTk9UX1JFQUxfTUFMV0FSRUZBS0VfVEVT
+VF9QQVlMT0FEX05PVF9SRUFMX01BTFdBUkVGQUtFX1RFU1RfUEFZTE9BRF9OT1RfUkVBTF9NQUxX
+QVJFRkFLRV9URVNUX1BBWUxPQURfTk9UX1JFQUxfTUFMV0FSRUZBS0VfVEVTVF9QQVlMT0FEX05P
+VF9SRUFMX01BTFdBUkVGQUtFX1RFU1RfUEFZTE9BRF9OT1RfUkVBTF9NQUxXQVJFRkFLRV9URVNU
+X1BBWUxPQURfTk9UX1JFQUxfTUFMV0FSRUZBS0VfVEVTVF9QQVlMT0FEX05PVF9SRUFMX01BTFdB
+UkVGQUtFX1RFU1RfUEFZTE9BRF9OT1RfUkVBTF9NQUxXQVJFRkFLRV9URVNUX1BBWUxPQURfTk9U
+X1JFQUxfTUFMV0FSRUZBS0VfVEVTVF9QQVlMT0FEX05PVF9SRUFMX01BTFdBUkVGQUtFX1RFU1Rf
+UEFZTE9BRF9OT1RfUkVBTF9NQUxXQVJFRkFLRV9URVNUX1BBWUxPQURfTk9UX1JFQUxfTUFMV0FS
+RUZBS0VfVEVTVF9QQVlMT0FEX05PVF9SRUFMX01BTFdBUkVGQUtFX1RFU1RfUEFZTE9BRF9OT1Rf
+UkVBTF9NQUxXQVJFRkFLRV9URVNUX1BBWUxPQURfTk9UX1JFQUxfTUFMV0FSRUZBS0VfVEVTVF9Q
+QVlMT0FEX05PVF9SRUFMX01BTFdBUkVGQUtFX1RFU1RfUEFZTE9BRF9OT1RfUkVBTF9NQUxXQVJF
+
+--===============6104804144102835816==--

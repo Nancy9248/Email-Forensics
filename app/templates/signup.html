@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up — Email Threat Forensics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="max-width: 400px; padding-top: 80px;">
+    <canvas id="bg-canvas"></canvas>
+    <div class="mono" style="color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; text-align:center;">Email Threat Forensics</div>
+    <h1 style="text-align:center; font-size: 22px;">Create Account</h1>
+
+    {% if error %}
+    <div class="alert-banner">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/signup" class="panel" style="margin-top: 20px;">
+        <div style="margin-bottom: 12px;">
+            <label style="display:block; color: var(--text-secondary); margin-bottom: 4px;">Username</label>
+            <input type="text" name="username" required minlength="3" style="width: 100%;">
+        </div>
+        <div style="margin-bottom: 12px;">
+            <label style="display:block; color: var(--text-secondary); margin-bottom: 4px;">Password</label>
+            <input type="password" name="password" required style="width: 100%;">
+        </div>
+        <div style="margin-bottom: 4px;">
+            <label style="display:block; color: var(--text-secondary); margin-bottom: 4px;">Confirm Password</label>
+            <input type="password" name="confirm_password" required style="width: 100%;">
+        </div>
+        <p style="color: var(--text-dim); font-size: 12px; margin: 8px 0 16px;">
+            Must be at least 8 characters, with at least one letter and one number.
+        </p>
+        <button type="submit" style="width: 100%;">Create Account</button>
+    </form>
+
+    <p style="text-align:center; color: var(--text-secondary); font-size: 13px; margin-top: 16px;">
+        Already have an account? <a href="/login">Log in</a>
+    </p>
+    <script src="{{ url_for('static', filename='network-bg.js') }}"></script>
+</body>
+</html>

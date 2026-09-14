@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit Log — Email Threat Forensics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .action-case_analyzed { color: var(--verdict-safe); }
+        .action-report_downloaded { color: var(--accent-teal); }
+        .action-retention_cleanup { color: var(--verdict-suspicious); }
+    </style>
+</head>
+<body class="wide">
+    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <a href="/">Analyze new email</a>
+        <a href="/dashboard">Case Dashboard</a>
+        <a href="/campaigns">Campaigns</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <div class="mono" style="color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Compliance</div>
+    <h1>Chain-of-Custody Audit Log</h1>
+    <p style="color: var(--text-secondary); font-size: 13px;">Every case analysis and report access is logged here for accountability.</p>
+
+    <table>
+        <tr>
+            <th>Time (UTC)</th>
+            <th>Case</th>
+            <th>Action</th>
+            <th>Detail</th>
+        </tr>
+        {% for entry in entries %}
+        <tr>
+            <td class="mono">{{ entry.logged_at[:19] }}</td>
+            <td class="mono">{{ entry.case_id if entry.case_id else '—' }}</td>
+            <td class="action-{{ entry.action }}">{{ entry.action }}</td>
+            <td style="color: var(--text-secondary);">{{ entry.detail }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" style="color: var(--text-secondary);">No audit events recorded yet.</td></tr>
+        {% endfor %}
+    </table>
+    <script src="{{ url_for('static', filename='network-bg.js') }}"></script>
+</body>
+</html>

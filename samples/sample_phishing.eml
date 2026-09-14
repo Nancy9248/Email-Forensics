@@ -1,0 +1,29 @@
+Delivered-To: victim@example-corp.com
+Received: by 2002:a05:6602:1234::with SMTP id x20csp1122334;
+        Thu, 11 Sep 2026 03:14:22 -0700 (PDT)
+Received: from mail-relay-3.suspicious-host.net (mail-relay-3.suspicious-host.net. [185.220.101.47])
+        by mx.example-corp.com with ESMTPS id f9-20020a170902abcdef;
+        Thu, 11 Sep 2026 03:14:20 -0700 (PDT)
+Received: from localhost (unknown [103.216.92.10])
+        by mail-relay-3.suspicious-host.net (Postfix) with ESMTP id 4X8k2v0P3Qz1
+        for <victim@example-corp.com>; Thu, 11 Sep 2026 10:14:15 +0000 (UTC)
+Authentication-Results: mx.example-corp.com;
+       spf=fail (google.com: domain of accounts@paypa1-secure.com does not designate 103.216.92.10 as permitted sender) smtp.mailfrom=accounts@paypa1-secure.com;
+       dkim=none (message not signed);
+       dmarc=fail (p=REJECT) header.from=paypal.com
+From: "PayPal Security" <accounts@paypa1-secure.com>
+Reply-To: recovery-support@paypa1-secure.com
+To: victim@example-corp.com
+Subject: Urgent: Your account has been limited - Action required
+Date: Thu, 11 Sep 2026 10:14:10 +0000
+Message-ID: <20260911101410.A1B2C3D4@paypa1-secure.com>
+Return-Path: <accounts@paypa1-secure.com>
+X-Originating-IP: [103.216.92.10]
+Content-Type: text/html; charset="UTF-8"
+
+<html><body>
+<p>Dear Customer,</p>
+<p>We have detected unusual activity on your PayPal account. Your account access has been limited.</p>
+<p>Please <a href="http://paypa1-secure-verify.com/login?id=8842">click here to verify your identity</a> within 24 hours or your account will be permanently suspended.</p>
+<p>Thank you,<br>PayPal Security Team</p>
+</body></html>

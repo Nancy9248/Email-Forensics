@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case Dashboard — Email Threat Forensics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="wide">
+    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <a href="/">Analyze new email</a>
+        <a href="/campaigns">Campaigns</a>
+        <a href="/audit-log">Audit Log</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <div class="mono" style="color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Case Management</div>
+    <h1>Case Dashboard</h1>
+
+    <form method="GET" action="/dashboard" style="margin-top: 16px;">
+        <input type="text" name="q" placeholder="Search domain, IP, or filename..." value="{{ query or '' }}" style="width: 280px;">
+        <button type="submit">Search</button>
+        {% if mask %}<input type="hidden" name="mask" value="1">{% endif %}
+    </form>
+
+    <div class="panel">
+        <strong style="color: var(--text-primary);">Privacy controls</strong>
+        <span style="margin-left: 16px;">
+        {% if mask %}
+            <a href="/dashboard?{{ 'q=' + query if query else '' }}">Show full sender addresses</a>
+        {% else %}
+            <a href="/dashboard?mask=1{{ '&q=' + query if query else '' }}">Mask sender addresses</a>
+        {% endif %}
+        </span>
+
+        <form method="POST" action="/run-retention-cleanup" style="display:inline-block; margin-left: 20px;"
+              onsubmit="return confirm('Delete uploaded files older than the retention period? Case records/reports are kept.');">
+            <label style="color: var(--text-secondary);">Retention (days): <input type="number" name="retention_days" value="90" min="1" style="width: 60px;"></label>
+            <button type="submit">Run Retention Cleanup</button>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Case</th>
+            <th>Analyzed</th>
+            <th>Filename</th>
+            <th>From Address</th>
+            <th>Sender Domain</th>
+            <th>Originating IP</th>
+            <th>Score</th>
+            <th>Verdict</th>
+            <th>Report</th>
+        </tr>
+        {% for case in cases %}
+        <tr>
+            <td class="mono">#{{ case.id }}</td>
+            <td class="mono">{{ case.analyzed_at[:19] }}</td>
+            <td>{{ case.filename }}</td>
+            <td class="mono">{{ case.from_address }}</td>
+            <td class="mono">{{ case.sender_domain }}</td>
+            <td class="mono">{{ case.originating_ip }}</td>
+            <td>{{ case.fraud_score }}</td>
+            <td class="verdict-{{ case.verdict }}">{{ case.verdict }}</td>
+            <td><a href="/report/{{ case.id }}">Download PDF</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" style="color: var(--text-secondary);">No cases analyzed yet.</td></tr>
+        {% endfor %}
+    </table>
+    <script src="{{ url_for('static', filename='network-bg.js') }}"></script>
+</body>
+</html>

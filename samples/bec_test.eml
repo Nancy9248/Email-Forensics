@@ -1,0 +1,19 @@
+From: "Robert Chen, CEO" <r.chen@corp-secure-mail.com>
+To: finance@example-corp.com
+Subject: Urgent wire transfer needed today
+Authentication-Results: mx; spf=fail; dkim=none; dmarc=fail
+Received:
+ from unknown (unknown [91.203.5.10]); Fri, 13 Sep 2026 09:00:00 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hi,
+
+I need you to process the payment immediately to our new account details atta=
+ched below for an urgent wire transfer. Please keep this confidential and don=
+'t discuss with anyone else in the office. I'm in meetings all day so please =
+just proceed.
+
+Thanks,
+Robert
