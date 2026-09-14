@@ -67,7 +67,7 @@ This platform bridges that gap by providing an end-to-end **AI-Powered Forensic 
                                            |
                                            v
        +-----------------------------------------------------------------------+
-       |        IIT QUANTUM CRYPTOGRAPHY DASHBOARD & FORENSIC REPORTS           |
+       |     ADVANCED QUANTUM CRYPTOGRAPHY DASHBOARD & FORENSIC REPORTS         |
        | - Real-Time Alert Banner & Verdict Stamp                              |
        | - Interactive Leaflet Origin Map                                      |
        | - Immutable Chain-of-Custody Audit Trail                              |
@@ -99,8 +99,8 @@ This platform bridges that gap by providing an end-to-end **AI-Powered Forensic 
 - **Automated Campaign Clustering**: Groups isolated attacks into unified threat campaigns for institutional awareness.
 - **Attribution Confidence Scoring**: Computes threat actor operating environments (compromised account vs. spoofed domain vs. malicious infrastructure).
 
-### 5. 🎨 Analyst Dashboard & IIT Quantum Cryptography Visual Engine
-- **IIT Quantum Cryptography Background**: Full HTML5 Canvas 2D engine featuring cascading SHA-256 code streams, rotating optical reticles, oscillating quantum waveforms, and interactive holographic decryption lenses.
+### 5. 🎨 Analyst Dashboard & Advanced Quantum Cryptography Visual Engine
+- **🌌 Quantum Cryptography Theme**: Breathtaking HTML5 Canvas 2D engine featuring cascading SHA-256 streams, rotating optical reticles, interactive decryption lenses, and glassmorphic HUD interfaces.
 - **Real-Time Interactive Map**: Leaflet.js mapping demonstrating the estimated geographic origin of the threat.
 - **Forensic PDF Export**: One-click generation of chain-of-custody PDF reports containing full evidence logs, hop timelines, and attribution rationale.
 
@@ -115,7 +115,7 @@ This platform bridges that gap by providing an end-to-end **AI-Powered Forensic 
 
 1. **Investigative Forensic Deep-Dive**: Unlike conventional spam filters that silently drop emails, this platform provides actionable origin intelligence for law enforcement and SIEM response units.
 2. **Multi-Vector Fraud Scoring**: Fuses NLP body analytics, header relay validation, IP reputation, and domain age into a unified confidence-weighted risk score.
-3. **State-of-the-Art IIT Visual Interface**: Built with an immersive Quantum Cryptography theme that wows evaluators and simplifies complex data visualization for security analysts.
+3. **State-of-the-Art Visual Interface**: Built with an immersive Quantum Cryptography theme that wows evaluators and simplifies complex data visualization for security analysts.
 4. **Law Enforcement & SIEM Ready**: Exportable PDF forensic reports designed to support institutional incident response and legal proceedings.
 
 ---

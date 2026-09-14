@@ -1,5 +1,5 @@
 /* ============================================================================
- * Email Threat Forensics — Premium IIT Quantum Cryptography Visual Engine
+ * Email Threat Forensics — Premium Quantum Cryptography Visual Engine
  * A state-of-the-art, breathtaking visual experience featuring:
  *  - Quantum Particle Nebula & Ambient Energy Dust
  *  - Oscillating Quantum Waveform (Sine/Cosine Cryptographic Lattice)
