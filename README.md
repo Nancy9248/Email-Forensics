@@ -188,5 +188,4 @@ This repository is fully configured for zero-setup deployment on cloud platforms
 
 ## 📄 License & Attribution
 
-This project is developed for **Smart India Hackathon (SIH)** and distributed under the **MIT License**.  
-Developed with ❤️ by Team Nancy.
+This project is developed for **Smart India Hackathon (SIH)** and distributed under the **MIT License**.
