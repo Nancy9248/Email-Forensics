@@ -8,12 +8,27 @@ Uses SQLite (built into Python — no extra service to run).
 import sqlite3
 import os
 import json
-from datetime import datetime, timezone
+def _get_db_path():
+    if os.environ.get("VERCEL") or not os.access(os.path.dirname(os.path.abspath(__file__)), os.W_OK):
+        tmp_db = os.path.join("/tmp", "cases.db")
+        if not os.path.exists(tmp_db):
+            orig_db = os.path.join(os.path.dirname(__file__), "..", "cases.db")
+            if os.path.exists(orig_db):
+                import shutil
+                try:
+                    shutil.copy2(orig_db, tmp_db)
+                except Exception:
+                    pass
+        return tmp_db
+    return os.path.join(os.path.dirname(__file__), "..", "cases.db")
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "cases.db")
+DB_PATH = _get_db_path()
 
 
 def _get_connection():
+    # Ensure DB is initialized if using /tmp
+    if not os.path.exists(DB_PATH):
+        init_db()
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn

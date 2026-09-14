@@ -17,22 +17,37 @@ Debug mode is OFF by default — only enabled if FLASK_DEBUG=1 is set.
 """
 
 import os
+import sys
 import json
 import secrets
+
+# Ensure app directory is in sys.path for serverless imports
+app_dir = os.path.dirname(os.path.abspath(__file__))
+if app_dir not in sys.path:
+    sys.path.insert(0, app_dir)
+
 from flask import Flask, request, render_template, Response, abort, redirect, url_for, session
 
 from analyze import analyze_email
-from case_db import get_all_cases, search_cases, get_case, log_audit_event, get_audit_log
+from case_db import get_all_cases, search_cases, get_case, log_audit_event, get_audit_log, init_db
 from correlation import get_campaign_groups
 from privacy import cleanup_old_uploads, mask_email_address
 from auth import login_required, register_user, authenticate_user
 from report_generator import generate_pdf_report
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
-UPLOAD_FOLDER = "uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+if os.environ.get("VERCEL"):
+    UPLOAD_FOLDER = "/tmp/uploads"
+else:
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(app_dir), "uploads")
+
+try:
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    init_db()
+except Exception:
+    pass
 
 
 @app.route("/signup", methods=["GET", "POST"])
