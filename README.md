@@ -2,10 +2,13 @@
 > **Smart India Hackathon (SIH) High-Impact Cybersecurity Solution**  
 > *Real-Time BEC Detection, Header Origin Traceability, Geolocation Mapping, Graph Attribution & Forensic Intelligence Engine*
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-email--forensics--g50t.onrender.com-00F0FF?style=for-the-badge&logo=render)](https://email-forensics-g50t.onrender.com)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Flask 3.1](https://img.shields.io/badge/Framework-Flask_3.1-00F0FF.svg)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-00FF9D.svg)](https://opensource.org/licenses/MIT)
 [![SIH Ready](https://img.shields.io/badge/SIH-2026_Edition-FF007F.svg)](#-sih-problem-statement-alignment)
+
+🔗 **Live Platform URL**: [https://email-forensics-g50t.onrender.com](https://email-forensics-g50t.onrender.com)
 
 ---
 
@@ -170,19 +173,24 @@ This platform bridges that gap by providing an end-to-end **AI-Powered Forensic 
 
 ---
 
-## 🌐 Cloud Deployment (Vercel & Render Ready)
+## 🌐 Live Production Deployment
 
-This repository is fully configured for zero-setup deployment on cloud platforms:
+The platform is deployed live and active:
+👉 **[https://email-forensics-g50t.onrender.com](https://email-forensics-g50t.onrender.com)**
 
-### Deploy on Vercel
+---
+
+### Deploying Your Own Instance
+
+#### Deploy on Render (Recommended)
 1. Fork / Clone this repository.
-2. Import the repository on [Vercel.com](https://vercel.com).
-3. Vercel automatically detects `vercel.json` and deploys your serverless platform instantly!
+2. Create a Web Service on [Render.com](https://render.com).
+3. Set Build Command: `pip install -r requirements.txt`
+4. Set Start Command: `gunicorn --chdir app server:app`
 
-### Deploy on Render
-1. Create a Web Service on [Render.com](https://render.com).
-2. Set Build Command: `pip install -r requirements.txt`
-3. Set Start Command: `gunicorn --chdir app server:app`
+#### Deploy on Vercel
+1. Import the repository on [Vercel.com](https://vercel.com).
+2. Vercel automatically detects `vercel.json` and deploys your serverless platform!
 
 ---
 
