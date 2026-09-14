@@ -169,7 +169,7 @@ This platform bridges that gap by providing an end-to-end **AI-Powered Forensic 
    ```
 
 5. **Access in Browser**:
-   Open ** https://email-forensics-g50t.onrender.com**
+   Open **http://127.0.0.1:5000**
 
 ---
 
