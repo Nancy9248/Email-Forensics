@@ -26,9 +26,12 @@ DB_PATH = _get_db_path()
 
 
 def _get_connection():
-    # Ensure DB is initialized if using /tmp
-    if not os.path.exists(DB_PATH):
-        init_db()
+    db_dir = os.path.dirname(os.path.abspath(DB_PATH))
+    if db_dir and not os.path.exists(db_dir):
+        try:
+            os.makedirs(db_dir, exist_ok=True)
+        except Exception:
+            pass
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
