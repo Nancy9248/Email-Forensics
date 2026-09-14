@@ -18,7 +18,12 @@ import time
 import ipaddress
 import requests
 
-CACHE_DIR = os.path.join(os.path.dirname(__file__), "..", "threat_intel_cache")
+def _get_cache_dir():
+    if os.environ.get("VERCEL") or not os.access(os.path.dirname(os.path.abspath(__file__)), os.W_OK):
+        return os.path.join("/tmp", "threat_intel_cache")
+    return os.path.join(os.path.dirname(__file__), "..", "threat_intel_cache")
+
+CACHE_DIR = _get_cache_dir()
 DROP_CACHE_PATH = os.path.join(CACHE_DIR, "spamhaus_drop.txt")
 TOR_CACHE_PATH = os.path.join(CACHE_DIR, "tor_exits.txt")
 CACHE_TTL_SECONDS = 24 * 60 * 60
